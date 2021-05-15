@@ -81,19 +81,32 @@ module axi_lite_interconnect #(
 	always_comb begin
 		if (state == IDLE) begin
 			if (start_r) begin
-				if (LOW_ADDR_TABLE[0] <= axibus_m[sel_m].ar.addr && axibus_m[sel_m].ar.addr < HIGH_ADDR_TABLE[0]) 
+				if ((LOW_ADDR_TABLE[0] <= axibus_m[sel_m].ar.addr) && (axibus_m[sel_m].ar.addr < HIGH_ADDR_TABLE[0])) begin
 					sel_s <= 0;
-				else if ((LOW_ADDR_TABLE[1] <= axibus_m[sel_m].ar.addr) && (axibus_m[sel_m].ar.addr < HIGH_ADDR_TABLE[1]))
+					$display("DNA: 1 ; %d %d %d,",LOW_ADDR_TABLE[0],axibus_m[sel_m].ar.addr, HIGH_ADDR_TABLE[0]);
+					end
+				else if ((LOW_ADDR_TABLE[1] <= axibus_m[sel_m].ar.addr) && (axibus_m[sel_m].ar.addr < HIGH_ADDR_TABLE[1])) begin
 					sel_s <= 1;
-				else 
+					$display("DNA: 2 ; %d %d %d,",LOW_ADDR_TABLE[1],axibus_m[sel_m].ar.addr, HIGH_ADDR_TABLE[1]);
+					end
+				else begin
 					sel_s <= 0;
+					$display("DNA: 3 ; %d %d %d,",LOW_ADDR_TABLE[0],axibus_m[sel_m].ar.addr, HIGH_ADDR_TABLE[0]);
+					end
 			end else if (start_w) begin
-				if (LOW_ADDR_TABLE[0] <= axibus_m[sel_m].aw.addr && axibus_m[sel_m].aw.addr < HIGH_ADDR_TABLE[0]) 
+				if ((LOW_ADDR_TABLE[0] <= axibus_m[sel_m].aw.addr) && (axibus_m[sel_m].aw.addr < HIGH_ADDR_TABLE[0]) )begin
 					sel_s <= 0;
-				else if (LOW_ADDR_TABLE[1] <= axibus_m[sel_m].aw.addr && axibus_m[sel_m].aw.addr < HIGH_ADDR_TABLE[1])
+					$display("DNA: 4 ; %d %d %d,",LOW_ADDR_TABLE[0],axibus_m[sel_m].ar.addr, HIGH_ADDR_TABLE[0]);
+					end
+				else if ((LOW_ADDR_TABLE[1] <= axibus_m[sel_m].aw.addr) && (axibus_m[sel_m].aw.addr < HIGH_ADDR_TABLE[1]))begin
 					sel_s <= 1;
-				else 
+					$display("DNA: 5 ; %d %d %d,",LOW_ADDR_TABLE[1],axibus_m[sel_m].ar.addr, HIGH_ADDR_TABLE[1]);
+					end
+				else begin
 					sel_s <= 0;
+					$display("DNA: 6 ; %d %d %d,",LOW_ADDR_TABLE[0],axibus_m[sel_m].ar.addr, HIGH_ADDR_TABLE[0]);
+					
+					end
 			end else begin
 				sel_s <= 0;
 			end

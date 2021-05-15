@@ -62,11 +62,11 @@ module tb_axi_lite_interconnect;
 		#(STEP * 10) areset_n = 1;
 		start_write_0 = 1; start_write_1 = 1;
         addr_0 = 12'h1; data_0 = 8'h10;
-		addr_1 = 12'h2; data_1 = 8'h20;
+		addr_1 = 12'h11; data_1 = 8'h20;
         #(STEP) start_write_0 = 0; start_write_1 = 0;
 		#(STEP * 20)
 		start_read_0 = 1; start_read_1 = 1; 
-		addr_0 = 1; addr_1 = 2;
+		addr_0 = 12'h1; addr_1 = 12'h11;
 		#(STEP) start_read_0 = 0; start_read_1 = 0; 
 		#(STEP * 20);
 
