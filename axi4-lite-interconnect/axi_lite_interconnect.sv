@@ -2,7 +2,7 @@ import axi_lite_pkg::*;
 module axi_lite_interconnect #(
 	parameter int NUM_MASTER = 2,
 	parameter int NUM_SLAVE  = 2,
-	parameter int LOW_ADDR_TABLE[2] = '{32'h0, 32'h10},
+	parameter int LOW_ADDR_TABLE[2] = '{32'h0, 32'h10}, //for only 2 masters & slave
 	parameter int HIGH_ADDR_TABLE[2] = '{32'h10, 32'h20}
 )(
 	input aclk,
@@ -61,7 +61,7 @@ module axi_lite_interconnect #(
 		assign axibus_s[i].b.valid = axis[i].bvalid;
 		assign axis[i].bready = axibus_s[i].b.ready;
 	end
-
+	
 	always_comb begin
 		if (state == IDLE) begin
 			if (axibus_m[0].ar.valid) begin 
@@ -77,6 +77,19 @@ module axi_lite_interconnect #(
 			end
 		end
 	end	
+//The above code accomodates only 2 masters
+	/* always_comb begin
+		if (state == IDLE) begin
+			for (genvar i = 0; i < NUM_MASTER; i++) begin
+			if (axibus_m[i].ar.valid) begin 
+				sel_m = i; start_r = 1; start_w = 0;
+			end else if (axibus_m[i].aw.valid) begin
+				sel_m = i; start_w = 1; start_r = 0;
+			end else begin
+				sel_m = 0; start_r = 0; start_w = 0;
+			end
+		end
+	end	 */
 
 	always_comb begin
 		if (state == IDLE) begin
