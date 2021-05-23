@@ -66,9 +66,9 @@ module top();
 
     axi4_env = new(bfm);
     
-    axi4_env.run();
-    #10000
-    $display("Testing finished!");
+    axi4_env.run(1000);
+  
+    //$display("Testing finished!");
 
   end
 
