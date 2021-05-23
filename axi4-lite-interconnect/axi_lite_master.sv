@@ -2,10 +2,7 @@ import axi_lite_pkg::*;
 
 module axi_lite_master#(
 	parameter int ADDR = 12'h4
-)(
-	input logic aclk,
-	input logic areset_n,
-	axi_lite_if.master m_axi_lite,
+)(	axi_lite_if.master m_axi_lite,
 	input logic start_read,
 	input logic start_write,
 	input addr_t addr,
@@ -38,16 +35,16 @@ module axi_lite_master#(
 	assign m_axi_lite.bready = ((state == WADDR) | (state == WDATA) |(state == WRESP)) ? 1 : 0;
 
 
-	always_ff @(posedge aclk) begin
-		if (~areset_n) begin
+	always_ff @(posedge m_axi_lite.aclk) begin
+		if (~m_axi_lite.areset_n) begin
 			rdata <= 0;
 		end else begin
 			if (state == RDATA) rdata <= m_axi_lite.rdata;
 		end
 	end
 
-	always_ff @(posedge aclk) begin
-		if (~areset_n) begin
+	always_ff @(posedge m_axi_lite.aclk) begin
+		if (~m_axi_lite.areset_n) begin
 			start_read_delay  <= 0;
 			start_write_delay <= 0;
 		end else begin
@@ -68,8 +65,8 @@ module axi_lite_master#(
 		endcase
 	end
 
-	always_ff @(posedge aclk) begin
-		if (~areset_n) begin
+	always_ff @(posedge m_axi_lite.aclk) begin
+		if (~m_axi_lite.areset_n) begin
 			state <= IDLE;
 		end else begin
 			state <= next_state;
