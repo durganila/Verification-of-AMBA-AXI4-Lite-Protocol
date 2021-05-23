@@ -1,6 +1,8 @@
 import axi_lite_pkg::*;
 
-interface axi_lite_if;
+interface axi_lite_if (
+			input logic aclk,
+			input areset_n);
 
 	// Read Address Channel
 	addr_t araddr;
@@ -38,19 +40,33 @@ interface axi_lite_if;
 	//data_t [31:0] buff;
 
 	modport master (
-		output araddr, arvalid, input arready,
-		input rdata, rresp, rvalid, output rready,
-		output awaddr, awvalid, input awready,
-		output 	wdata, wstrb, wvalid, input wready,
-		input bresp, bvalid, output bready
+		input aclk,
+		input areset_n,
+		input arready,
+		input rdata, rresp, rvalid,
+		input bresp, bvalid,
+		input awready,
+		input wready,
+		output araddr, arvalid, 
+		output rready,
+		output awaddr, awvalid, 
+		output 	wdata, wstrb, wvalid, 
+		output bready
 	);
 
 	modport slave (
-		input araddr, arvalid, output arready,
-		output rdata, rresp, rvalid, input rready,
-		input awaddr, awvalid, output awready,
-		input wdata, wstrb, wvalid, output wready,
-		output bresp, bvalid, input bready      //output dump_ack, output slave_buff_addr, output slave_buff_data, input start_dump
+		input aclk,
+		input areset_n,
+		input rready,
+		input bready
+		input araddr, arvalid,
+		input awaddr, awvalid,
+		input wdata, wstrb, wvalid,
+		output arready,
+		output rdata, rresp, rvalid, 
+		output awready,
+		output wready,
+		output bresp, bvalid      //output dump_ack, output slave_buff_addr, output slave_buff_data, input start_dump
 	);
 
 endinterface
