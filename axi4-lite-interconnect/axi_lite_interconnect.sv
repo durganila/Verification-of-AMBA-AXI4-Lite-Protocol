@@ -5,8 +5,6 @@ module axi_lite_interconnect #(
 	parameter int LOW_ADDR_TABLE[2] = '{32'h0, 32'h10}, //for only 2 masters & slave
 	parameter int HIGH_ADDR_TABLE[2] = '{32'h10, 32'h20}
 )(
-	input aclk,
-	input areset_n,
 	axi_lite_if.master axim[0 : NUM_MASTER - 1],
 	axi_lite_if.slave axis[0 : NUM_SLAVE - 1]
 );
@@ -182,8 +180,8 @@ module axi_lite_interconnect #(
 		endcase
 	end
 
-	always_ff @(posedge aclk) begin
-		if (~areset_n) begin
+	always_ff @(posedge axim.aclk) begin
+		if (~axim.areset_n) begin
 			state <= IDLE;
 		end else begin
 			state <= next_state;
