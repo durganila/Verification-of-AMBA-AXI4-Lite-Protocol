@@ -58,7 +58,7 @@ interface axi_lite_if (
 		input aclk,
 		input areset_n,
 		input rready,
-		input bready
+		input bready,
 		input araddr, arvalid,
 		input awaddr, awvalid,
 		input wdata, wstrb, wvalid,
