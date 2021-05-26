@@ -9,7 +9,7 @@ module axi_lite_master#(
 	input data_t data
 );
 
-	typedef enum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
+	//typedef enum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
 	state_type state, next_state;
 
 	data_t rdata;

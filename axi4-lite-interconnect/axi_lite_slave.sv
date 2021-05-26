@@ -4,7 +4,7 @@ module axi_lite_slave (
 	axi_lite_if.slave s_axi_lite
 );
 
-	typedef enum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
+	//typedef enum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
 	state_type state, next_state;
 
 	addr_t addr;

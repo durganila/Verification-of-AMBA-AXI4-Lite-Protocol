@@ -17,6 +17,8 @@ package axi_lite_pkg;
 	typedef logic [DATA_WIDTH - 1 : 0] data_t;
 	typedef logic [STRB_WIDTH - 1 : 0] strb_t;
 	typedef logic [1 : 0] resp_t;
+	
+	typedef enum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
 
 	// buffer size, used in slave/scoreboard
     parameter BUFFER_SIZE = 2**12;
