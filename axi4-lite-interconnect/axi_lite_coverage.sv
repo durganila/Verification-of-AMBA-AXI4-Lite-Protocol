@@ -1,13 +1,11 @@
-`include "axi_lite_pkg.sv"
-
 import axi_lite_pkg::*;
 
 class axi_lite_coverage;
     virtual axi_lite_if bfm0, bfm1;
-    function new (virtual axi_lite_if bfm0, bfm1);
+/*     function new (virtual axi_lite_if bfm0, bfm1);
         this.bfm0 = bfm0;
         this.bfm1 = bfm1;
-    endfunction
+    endfunction */
 	
 	// ------------------------------------------------------- COVERAGES -------------------------------------------------------
 	// -----------------------------------------------------------bfm0----------------------------------------------------------
@@ -516,7 +514,7 @@ class axi_lite_coverage;
 	
 	
 	// Function "new" which instantiates all the Covergroups
-	function new (virtual axi4_lite_if b0,b1);
+	function new (virtual axi_lite_if b0,b1);
 		cg_Read_Address0 = new();
 		cg_Read_Data0 = new();
 		cg_Write_Address0 = new();

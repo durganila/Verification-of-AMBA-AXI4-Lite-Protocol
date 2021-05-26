@@ -1,3 +1,5 @@
+`include "TestTypes/fully_random_test.sv"
+
 import axi_lite_pkg::*;
 
 class testFactory;

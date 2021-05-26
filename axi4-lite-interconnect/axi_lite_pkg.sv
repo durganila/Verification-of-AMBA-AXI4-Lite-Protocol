@@ -1,3 +1,14 @@
+//`include "transaction.sv"
+//`include "generator.sv"
+//`include "driver.sv"
+//`include "TestTypes/fully_random_test.sv"
+//`include "testFactory.sv"
+//`include "monitor.sv"
+//`include "scoreboard.sv"
+//`include "axi_lite_coverage.sv"
+//`include "axi_env.sv"
+//`include "tester.sv"
+
 package axi_lite_pkg;
 
 	localparam STEP = 10;
@@ -68,16 +79,5 @@ package axi_lite_pkg;
 		w_chan_t w;
 		b_chan_t b;
 	} axi_lite_bus_t;
-
-`include "transaction.sv"
-`include "generator.sv"
-`include "driver.sv"
-`include "TestTypes/fully_random_test.sv"
-`include "testFactory.sv"
-`include "monitor.sv"
-`include "scoreboard.sv"
-`include "axi_lite_coverage.sv"
-`include "axi_env.sv"
-`include "tester.sv"
 
 endpackage
