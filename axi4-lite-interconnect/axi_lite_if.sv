@@ -2,7 +2,12 @@ import axi_lite_pkg::*;
 
 interface axi_lite_if (
 			input logic aclk,
-			input areset_n);
+			input logic areset_n);
+
+	logic start_write;
+	logic start_read;
+	addr_t addr;
+	data_t data;
 
 	// Read Address Channel
 	addr_t araddr;
@@ -42,6 +47,10 @@ interface axi_lite_if (
 	modport master (
 		input aclk,
 		input areset_n,
+		input start_read,
+		input start_write,
+		input addr,
+		input data,
 		input arready,
 		input rdata, rresp, rvalid,
 		input bresp, bvalid,
@@ -50,7 +59,7 @@ interface axi_lite_if (
 		output araddr, arvalid, 
 		output rready,
 		output awaddr, awvalid, 
-		output 	wdata, wstrb, wvalid, 
+		output wdata, wstrb, wvalid, 
 		output bready
 	);
 
@@ -58,7 +67,7 @@ interface axi_lite_if (
 		input aclk,
 		input areset_n,
 		input rready,
-		input bready
+		input bready,
 		input araddr, arvalid,
 		input awaddr, awvalid,
 		input wdata, wstrb, wvalid,

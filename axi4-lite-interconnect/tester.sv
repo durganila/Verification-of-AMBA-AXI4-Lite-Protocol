@@ -1,35 +1,5 @@
 import axi_lite_pkg::*;
-
-class transaction;
-  
-  localparam data_range = 2 ** (DATA_WIDTH) -1;
-  
-  //declaring the transaction items
-  rand addr_t addr_0, addr_1;
-  rand data_t data_0, data_1;
-  rand bit       start_read_0, start_read_1;
-  rand bit       start_write_0, start_write_1;
-  
-   
-  //constaint, to generate any one among write and read
-  constraint wr_rd { 
-	start_read_0 != start_write_0;
-	start_read_1 != start_write_1;
-				}
-	
-  constraint addr_range {
-	addr_0, addr_1 inside{[0 : 2048]};
-	}
-	
-  constraint dist_data_cn {
-    data_0 dist {
-		0 := 40,
-       [1: data_range] := 60};
-  }
-  
-endclass
-
-
+`include "transaction.sv"
 //Tester class
 
 class tester;
@@ -38,11 +8,11 @@ class tester;
 
   function new (virtual axi_lite_if b0, virtual axi_lite_if b1 );
     bfm0 = b0;
-	bfm1 = b1;
+	  bfm1 = b1;
   endfunction: new
 
 //randomisation of transaction
-transaction trans = new();
+rand transaction trans = new();
 if( !trans.randomize() ) $fatal("Gen:: trans randomization failed");
 
 ///////////////////////

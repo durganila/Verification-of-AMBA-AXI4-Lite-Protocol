@@ -2,11 +2,7 @@ import axi_lite_pkg::*;
 
 module axi_lite_master#(
 	parameter int ADDR = 12'h4
-)(	axi_lite_if.master m_axi_lite,
-	input logic start_read,
-	input logic start_write,
-	input addr_t addr,
-	input data_t data
+)(	axi_lite_if.master m_axi_lite
 );
 
 	typedef enum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
@@ -16,7 +12,7 @@ module axi_lite_master#(
 	logic start_read_delay, start_write_delay;
 
 	// AR
-	assign m_axi_lite.araddr  = (state == RADDR) ? addr : 12'h0;
+	assign m_axi_lite.araddr  = (state == RADDR) ? m_axi_lite.addr : 12'h0;
 	assign m_axi_lite.arvalid = (state == RADDR) ? 1 : 0;
 
 	// R
@@ -24,11 +20,11 @@ module axi_lite_master#(
 
 	// AW
 	assign m_axi_lite.awvalid = (state == WADDR) ? 1 : 0;
-	assign m_axi_lite.awaddr  = (state == WADDR) ? addr : 12'h0;
+	assign m_axi_lite.awaddr  = (state == WADDR) ? m_axi_lite.addr : 12'h0;
 
 	// W
 	assign m_axi_lite.wvalid = (state == WDATA) ? 1 : 0;
-	assign m_axi_lite.wdata  = (state == WDATA) ? data : 8'h0;
+	assign m_axi_lite.wdata  = (state == WDATA) ? m_axi_lite.data : 8'h0;
 	assign m_axi_lite.wstrb  = 4'b0000;
 
 	// B
@@ -48,8 +44,8 @@ module axi_lite_master#(
 			start_read_delay  <= 0;
 			start_write_delay <= 0;
 		end else begin
-			start_read_delay  <= start_read;
-			start_write_delay <= start_write;
+			start_read_delay  <= m_axi_lite.start_read;
+			start_write_delay <= m_axi_lite.start_write;
 		end
 	end
 

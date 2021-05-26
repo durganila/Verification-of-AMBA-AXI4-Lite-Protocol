@@ -1,5 +1,5 @@
 package axi_lite_pkg;
-	
+
 	localparam STEP = 10;
 	localparam addr0 = 32'h4;
 	localparam addr1 = 32'h14;
@@ -67,5 +67,14 @@ package axi_lite_pkg;
 		b_chan_t b;
 	} axi_lite_bus_t;
 
+`include "transaction.sv"
+`include "generator.sv"
+`include "driver.sv"
+`include "TestTypes/fully_random_test.sv"
+`include "testfactory.sv"
+`include "monitor.sv"
+`include "scoreboard.sv"
+`include "axi_lite_coverage.sv"
+`include "axi_env.sv"
 
 endpackage
