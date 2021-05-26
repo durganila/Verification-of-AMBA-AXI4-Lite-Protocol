@@ -6,7 +6,7 @@ module axi_lite_interconnect #(
 	parameter int LOW_ADDR_TABLE[2] = '{32'h0, 32'h10}, //for only 2 masters & slave
 	parameter int HIGH_ADDR_TABLE[2] = '{32'h10, 32'h20}
 )(
-	logic aclk, areset_n,
+	input logic aclk, areset_n,
 	axi_lite_if.master axim[0 : NUM_MASTER - 1],
 	axi_lite_if.slave axis[0 : NUM_SLAVE - 1]
 );
