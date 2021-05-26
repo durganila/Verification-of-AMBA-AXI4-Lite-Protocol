@@ -73,10 +73,11 @@ package axi_lite_pkg;
 `include "generator.sv"
 `include "driver.sv"
 `include "TestTypes/fully_random_test.sv"
-`include "testfactory.sv"
+`include "testFactory.sv"
 `include "monitor.sv"
 `include "scoreboard.sv"
 `include "axi_lite_coverage.sv"
 `include "axi_env.sv"
+`include "tester.sv"
 
 endpackage

@@ -1,3 +1,5 @@
+`include "transaction.sv"
+
 import axi_lite_pkg::*;
 
 class driver;
@@ -59,12 +61,12 @@ class driver;
         bfm1.arvalid    = txn.arvalid_1;
         bfm1.araddr     = txn.araddr_1;
         // set read and write to invalid after 1 cycle
-        @(posedge bfm0.aclk);
+        @(posedge bfm1.aclk);
         bfm1.wvalid     = 0;
         bfm1.awvalid    = 0;
         bfm1.wvalid     = 0;
         bfm1.awvalid    = 0;
-        @(posedge bfm0.aclk);
+        @(posedge bfm1.aclk);
     endtask
 
 endclass

@@ -50,7 +50,7 @@ interface axi_lite_if (
 		output araddr, arvalid, 
 		output rready,
 		output awaddr, awvalid, 
-		output 	wdata, wstrb, wvalid, 
+		output wdata, wstrb, wvalid, 
 		output bready
 	);
 

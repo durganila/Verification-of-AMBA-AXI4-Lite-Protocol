@@ -1,3 +1,10 @@
+`include "generator.sv"
+`include "driver.sv"
+`include "testFactory.sv"
+`include "monitor.sv"
+`include "scoreboard.sv"
+`include "axi_lite_coverage.sv"
+
 import axi_lite_pkg::*;
 
 class environment;
@@ -37,6 +44,10 @@ class environment;
 			end
 			begin
 				generator_h.execute();
+				driver_h.execute();
+				//monitor_h.execute();
+				//scoreboard_h.execute();
+				coverage_h.execute();
 			end
 		join
 	endtask : execute

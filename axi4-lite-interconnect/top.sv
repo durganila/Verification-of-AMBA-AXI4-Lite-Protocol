@@ -1,4 +1,7 @@
 //Packages and includes:
+
+`include "axi_env.sv"
+
 import axi_lite_pkg::*;
 
 module top();

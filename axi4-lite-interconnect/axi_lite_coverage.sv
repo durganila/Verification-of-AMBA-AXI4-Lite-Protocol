@@ -1,3 +1,5 @@
+`include "axi_lite_pkg.sv"
+
 import axi_lite_pkg::*;
 
 class axi_lite_coverage;
@@ -514,7 +516,7 @@ class axi_lite_coverage;
 	
 	
 	// Function "new" which instantiates all the Covergroups
-	function new (virtual axi4_lite_if bfm0,bfm1);
+	function new (virtual axi4_lite_if b0,b1);
 		cg_Read_Address0 = new();
 		cg_Read_Data0 = new();
 		cg_Write_Address0 = new();
@@ -524,7 +526,7 @@ class axi_lite_coverage;
 		cg_Master_FSM0 = new();
 		cg_Slave_FSM0 = new();
 	
-		bfm_0 = bfm0;
+		this.bfm0 = b0;
 		
 		cg_Read_Address1 = new();
 		cg_Read_Data1 = new();
@@ -535,10 +537,9 @@ class axi_lite_coverage;
 		cg_Master_FSM1 = new();
 		cg_Slave_FSM1 = new();
 		
-		bfm_1 = bfm1;
+		this.bfm1 = b1;
 		
 	endfunction : new
-	
 	
 	// Task "execute" which samples all the covergroups
 	// This task can be called in environment class to sample all the covergroups
