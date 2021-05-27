@@ -67,6 +67,7 @@ package axi_lite_pkg;
 		b_chan_t b;
 	} axi_lite_bus_t;
 
+
 `include "transaction.sv"
 `include "generator.sv"
 `include "driver.sv"

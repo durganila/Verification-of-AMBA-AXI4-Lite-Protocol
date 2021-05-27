@@ -1,5 +1,5 @@
 import axi_lite_pkg::*;
-`include "transaction.sv"
+`include "trans.sv"
 //Tester class
 
 class tester;
@@ -11,8 +11,8 @@ class tester;
 	  bfm1 = b1;
   endfunction: new
 
-//randomisation of transaction
-rand transaction trans = new();
+//randomisation of trans
+rand trans trans = new();
 if( !trans.randomize() ) $fatal("Gen:: trans randomization failed");
 
 ///////////////////////

@@ -36,13 +36,6 @@ interface axi_lite_if (
 	logic bvalid;
 	logic bready;
 	
-	/*// Buffer Scan (only for emulation verification)
-	logic start_dump;
-	data_t slave_buff_data;
-	addr_t slave_buff_addr;
-	logic dump_ack;*/
-
-	//data_t [31:0] buff;
 
 	modport master (
 		input aclk,

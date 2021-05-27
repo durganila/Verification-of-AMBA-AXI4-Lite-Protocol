@@ -1,4 +1,5 @@
 import axi_lite_pkg::*;
+//`include "transaction.sv"
 
 class driver;
 
@@ -6,17 +7,19 @@ class driver;
 	mailbox mb_generator2driver = new();
 
     // virtual interface
-    virtual axi_lite_if bfm0, bfm1;
+    virtual axi_lite_if bfm0;
     
-    // transaction objs for 2 devices to store data send from generator
+    // transaction objs to store data send from generator
     transaction txn; 
 
+    logic debugMode;
+
     // constructor
-    function new(mailbox mb_generator2driver, virtual axi_lite_if bfm0, bfm1);
+    function new(mailbox mb_generator2driver, virtual axi_lite_if bfm0, logic debugMode);
 
         this.mb_generator2driver = mb_generator2driver;
         this.bfm0 = bfm0;
-        this.bfm1 = bfm1;
+        this.debugMode = debugMode;
     endfunction 
 
     task execute();
@@ -25,18 +28,17 @@ class driver;
         forever begin
             mb_generator2driver.get(txn);
 
-            drive_device_1_master(txn);
-            drive_device_2_master(txn);
+            drive_master(txn);
         end
     endtask
 
-    task drive_device_1_master(transaction txn);
+    task drive_master(transaction txn);
         
         // set writes
-        bfm0.addr           = txn.addr_0;
-        bfm0.data           = txn.data_0;
-        bfm0.start_write    = txn.start_write_0;
-        bfm0.start_read     = txn.start_read_0;
+        bfm0.addr           = txn.addr;
+        bfm0.data           = txn.data;
+        bfm0.start_write    = txn.start_write;
+        bfm0.start_read     = txn.start_read;
 
         // set read and write to invalid after 1 cycle
         @(posedge bfm0.aclk);
@@ -44,21 +46,6 @@ class driver;
         bfm0.start_read     = '0;
 
         @(posedge bfm0.aclk);
-    endtask
-
-    task drive_device_2_master(transaction txn);
-         // set writes
-        bfm1.addr           = txn.addr_1;
-        bfm1.data           = txn.data_1;
-        bfm1.start_write    = txn.start_write_1;
-        bfm1.start_read     = txn.start_read_1;
-
-        // set read and write to invalid after 1 cycle
-        @(posedge bfm1.aclk);
-        bfm1.start_write    = '0;
-        bfm1.start_read     = '0;
-
-        @(posedge bfm1.aclk);
     endtask
 
 endclass
