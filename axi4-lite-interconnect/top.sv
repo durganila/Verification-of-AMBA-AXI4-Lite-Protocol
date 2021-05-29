@@ -1,14 +1,23 @@
+///////////////////////////////////////////////////////////////////////////////////////////
+// Name         : testFactory.sv                                                                
+// Authors      : Amrutha | Durganila | Manjari  				                                 
+// Date         : 06/02/2020                                                                  
+// Version      : 1  
+// Modified By  :                                                                         
+///////////////////////////////////////////////////////////////////////////////////////////
+
 //Packages and includes:
 import axi_lite_pkg::*;
 
 module top();
 
-  logic  aclk;
-  logic  areset_n;
+  logic  aclk;                            // var for clock
+  logic  areset_n;                        // var for reset
 
   // TODO: Get from plusargs
-  string test_type = "full_random";
-  logic debugMode = 1'b1;
+  string test_type       = "full_random";      // var for test type
+  logic  debugMode       = 1'b1;               // var for debug mode
+  int    numTransactions = 10;                 // var for number of transactions
 
   //Instantiate the BFM:
   axi_lite_if bfm0(.aclk(aclk), .areset_n(areset_n));
@@ -30,22 +39,24 @@ module top();
 //Start the clock:
   initial begin
     aclk = 0;
-    forever #5 aclk = ~aclk;
+    forever #1 aclk = ~aclk;
   end
 
   initial begin
-    //TODO: move to reset task
-    areset_n = 0;
-    #20 areset_n = 1;
-
-    env_h = new(bfm0, test_type, debugMode);
-    
+    InitialReset();
+    env_h = new(bfm0, test_type, debugMode, numTransactions);
     env_h.execute();
   end
 
   initial begin
-    #1000;
+    #10000;
     $finish();
   end
+
+  task InitialReset();
+    areset_n = 0;
+    repeat(2) @(posedge aclk);
+    areset_n = 1;
+  endtask
 
 endmodule

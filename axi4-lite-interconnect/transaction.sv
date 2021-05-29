@@ -11,6 +11,7 @@ class transaction;
   rand data_t data;                // data vars
   bit         start_read;          // start a read
   bit         start_write;         // start a write
+  data_t      rd_data;             // read data
   
 
   function new();
@@ -23,7 +24,8 @@ class transaction;
 				           }*/
 	
   constraint addr_range {
-	                      addr inside{[0 : 2048]};
+	                      //addr inside{[0 : 2048]};
+                        addr inside{[0 : 4098]};
 	                      }
 	
   constraint dist_data_cn {

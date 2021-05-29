@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////////////////
+// Name         : axi_lite_pkg.sv 
+// Description  :                                                               
+// Authors      :   				                                 
+// Date         : 05/29/2021                                                                  
+// Version      : 1  
+// Modified	By	: Amrutha | Durganila | Manjari                                                                    
+///////////////////////////////////////////////////////////////////////////////////////////
+
 package axi_lite_pkg;
 
 	localparam STEP = 10;
@@ -17,6 +26,8 @@ package axi_lite_pkg;
 	typedef logic [DATA_WIDTH - 1 : 0] data_t;
 	typedef logic [STRB_WIDTH - 1 : 0] strb_t;
 	typedef logic [1 : 0] resp_t;
+
+	typedef enum logic [2 : 0] {IDLE, RADDR, RDATA, WADDR, WDATA, WRESP} state_type;
 
 	// buffer size, used in slave/scoreboard
     parameter BUFFER_SIZE = 2**12;
@@ -75,7 +86,7 @@ package axi_lite_pkg;
 `include "testfactory.sv"
 `include "monitor.sv"
 `include "scoreboard.sv"
-`include "axi_lite_coverage.sv"
+//`include "axi_lite_coverage.sv"
 `include "axi_env.sv"
 
 endpackage

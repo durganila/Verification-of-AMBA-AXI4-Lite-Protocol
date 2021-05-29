@@ -9,7 +9,7 @@ module axi_lite_slave (
 
 	addr_t addr;
 
-	logic [BUFFER_SIZE-1:0][7:0] buffer;
+	logic [BUFFER_SIZE-1:0] [0:7] buffer;
 	
 	// AR
 	assign s_axi_lite.arready = (state == RADDR) ? 1 : 0;

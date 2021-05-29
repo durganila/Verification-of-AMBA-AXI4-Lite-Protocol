@@ -1,42 +1,33 @@
+///////////////////////////////////////////////////////////////////////////////////////////
+// Name         : fully_random_test.sv 
+// Description  :                                                               
+// Authors      : Amrutha | Durganila | Manjari  				                                 
+// Date         : 05/20/2021                                                                  
+// Version      : 1                                                                         
+///////////////////////////////////////////////////////////////////////////////////////////
+
 import axi_lite_pkg::*;
-//`include "../generator.sv"
-//`include "../transaction.sv"
 
 class fully_random_test extends generator;
 
     transaction txn;
     transaction generate_pkt;
 
-    function new(mailbox mb_generator2driver, logic debugMode);
-        super.new(mb_generator2driver, debugMode);
+    function new(mailbox mb_generator2driver, logic debugMode, int numTransactions);
+        super.new(mb_generator2driver, debugMode, numTransactions);
     endfunction 
 
     task execute();
-            // perform reset low
-            driver_send(1'b0, '0, '0, '0, '0);
-            driver_send(1'b0, '0, '0, '0, '0);
-            driver_send(1'b0, '0, '0, '0, '0);
-            driver_send(1'b0, '0, '0, '0, '0);
-            driver_send(1'b0, '0, '0, '0, '0);
-            #10;
-            // dsable reset
-            driver_send(1'b1, '0, '0, '0, '0);
-            #10;
-            driver_send(1'b1, 12'h1, 8'h8, '0, '1);
-            #20;
-            driver_send(1'b1, 12'h1, 8'h8, '1, '0);
-
-            repeat(2) begin
+            repeat(numTransactions) begin
                 // randomize transactions
                 generate_pkt = new();
                 assert (generate_pkt.randomize())
                     else $error($time, "fully_random_test: Assertion RandomizeTransactions failed!");
-
-                if(debugMode) $display($time," fully_random_test: addr %h, data %h read %b, write %b", generate_pkt.addr, generate_pkt.data, '0, '1);
+                
                 driver_send(1'b1, generate_pkt.addr, generate_pkt.data, '0, '1);
-                #20;
-                 if(debugMode) $display($time," fully_random_test: addr %h, data %h read %b, write %b", generate_pkt.addr, generate_pkt.data, '1, '0);
-                driver_send(1'b1, generate_pkt.addr, generate_pkt.data, '1, '0);
+                #10;
+                driver_send(1'b1, generate_pkt.addr, '0, '1, '0);
+                #10;
             end
     endtask
 
@@ -48,13 +39,16 @@ class fully_random_test extends generator;
                     logic start_read,
                     logic start_write
     );
-        txn = new();
+        txn                 = new();
         txn.reset_n         = reset_n;
         txn.addr            = addr;
         txn.data            = data; 
         txn.start_read      = start_read;
         txn.start_write     = start_write; 
 
+        if(debugMode) 
+            $display($time," fully_random_test.driver_send: reset_n %b, addr %h, data %h read %b, write %b", 
+                                reset_n, addr, data, start_read, start_write);
         mb_generator2driver.put(txn);
     endtask
 endclass
