@@ -9,8 +9,8 @@ class transaction;
   
   rand addr_t addr;                // Address vars
   rand data_t data;                // data vars
-  rand        start_read;          // start a read
-  rand        start_write;         // start a write
+  rand bit 	  start_read;          // start a read
+  rand bit    start_write;         // start a write
   data_t      rd_data;             // read data
   
 
@@ -19,8 +19,7 @@ class transaction;
   endfunction
   //constaint, to generate any one among write and read
   constraint wr_rd { 
-	                  start_read_0 != start_write_0;
-	                  start_read_1 != start_write_1;
+	                  start_read != start_write;
 				           }
 	
   constraint addr_range {
