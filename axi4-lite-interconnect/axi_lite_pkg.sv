@@ -83,7 +83,7 @@ package axi_lite_pkg;
 `include "generator.sv"
 `include "driver.sv"
 `include "TestTypes/fully_random_test.sv"
-`include "TestTypes/deterministic_tests.sv"
+`include "TestTypes/deterministic_test.sv"
 `include "testfactory.sv"
 `include "monitor.sv"
 `include "scoreboard.sv"
