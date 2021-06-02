@@ -8,6 +8,8 @@
 
 import axi_lite_pkg::*;
 
+`include "axi_lite_coverage.sv"
+
 class environment;
 
 	virtual axi_lite_if bfm0;					// virtual interface
@@ -19,7 +21,7 @@ class environment;
 	driver 				driver_h;				// driver handler	
 	monitor 			monitor_h;				// monitor handler
 	scoreboard 			scoreboard_h;			// scoreboard handler
-	//axi_lite_coverage 	coverage_h;			// coverage handler
+	axi_lite_coverage 	coverage_h;			// coverage handler
 	testFactory			testFactory_h;			// test factory handler
 	
 	// mailbox for connection between generator and driver
@@ -41,7 +43,7 @@ class environment;
 		driver_h 		= new(mb_generator2driver, bfm0, debugMode);
 		monitor_h 		= new(mb_monitor2scoreboard, bfm0, debugMode);
 		scoreboard_h 	= new(mb_monitor2scoreboard, bfm0);
-		//coverage_h 		= new(bfm0);
+		coverage_h 		= new(bfm0);
 
 		// run all the execute tasks concurrently
 		fork
@@ -49,6 +51,7 @@ class environment;
 			scoreboard_h.execute();
 			generator_h.execute();
 			driver_h.execute();
+			coverage_h.execute();
 		join
 	endtask : execute
 

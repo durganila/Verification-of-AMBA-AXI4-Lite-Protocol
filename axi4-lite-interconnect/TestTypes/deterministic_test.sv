@@ -1,6 +1,6 @@
 import axi_lite_pkg::*;
 
-class deterministic_tests extends generator;
+class deterministic_test extends generator;
 
     transaction txn;
 

@@ -9,8 +9,8 @@ class transaction;
   
   rand addr_t addr;                // Address vars
   rand data_t data;                // data vars
-  rand bit 	  start_read;          // start a read
-  rand bit    start_write;         // start a write
+  rand bit       start_read;          // start a read
+  rand bit       start_write;         // start a write
   data_t      rd_data;             // read data
   
 
@@ -21,6 +21,7 @@ class transaction;
   constraint wr_rd { 
 	                  start_read != start_write;
 				           }
+
 	
   constraint addr_range {
                         addr inside{[0 : 2048]};

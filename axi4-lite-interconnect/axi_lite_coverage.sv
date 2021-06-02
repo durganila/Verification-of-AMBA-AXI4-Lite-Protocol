@@ -107,7 +107,7 @@ class axi_lite_coverage;
 	
 	// Covergroup 6 for Master FSM
 	covergroup cg_Master_FSM;
-		Master_Read_FSM: coverpoint $root.top.master.state iff (bfm.areset_n) {   // Coverpoint for Master Read FSM
+		Master_Read_FSM: coverpoint $root.top.master0.state iff (bfm.areset_n) {   // Coverpoint for Master Read FSM
 			bins mr1 = (IDLE => RADDR);
 			bins mr2 = (RADDR => RDATA);
 			bins mr3 = (RDATA => IDLE);
@@ -116,7 +116,7 @@ class axi_lite_coverage;
 			illegal_bins mr_illegal3 = (IDLE => RDATA);
 		}
 	
-		Master_Write_FSM: coverpoint $root.top.master.state iff (bfm.areset_n) {    // Coverpoint for Master Write FSM
+		Master_Write_FSM: coverpoint $root.top.master0.state iff (bfm.areset_n) {    // Coverpoint for Master Write FSM
 			bins mw1 = (IDLE => WADDR);
 			bins mw2 = (WADDR => WDATA);
 			bins mw3 = (WDATA => WRESP);
@@ -134,7 +134,7 @@ class axi_lite_coverage;
 	
 	// Covergroup 7 for Slave FSM
 	covergroup cg_Slave_FSM;
-		Slave_Read_FSM: coverpoint $root.top.slave.state iff (bfm.areset_n) {  // Coverpoint for Slave Read FSM
+		Slave_Read_FSM: coverpoint $root.top.slave0.state iff (bfm.areset_n) {  // Coverpoint for Slave Read FSM
 			bins sr1 = (IDLE => RADDR);
 			bins sr2 = (RADDR => RDATA);
 			bins sr3 = (RDATA => IDLE);
@@ -143,7 +143,7 @@ class axi_lite_coverage;
 			illegal_bins sr_illegal3 = (IDLE => RDATA);
 		}
 	
-		Slave_Write_FSM: coverpoint $root.top.slave.state iff (bfm.areset_n) {   // Coverpoint for Slave Write FSM
+		Slave_Write_FSM: coverpoint $root.top.slave0.state iff (bfm.areset_n) {   // Coverpoint for Slave Write FSM
 			bins sw1 = (IDLE => WADDR);
 			bins sw2 = (WADDR => WDATA);
 			bins sw3 = (WDATA => WRESP);
@@ -212,7 +212,7 @@ class axi_lite_coverage;
 			illegal_bins bready_High_Reset_illegal = {1};
 		}
 			
-		Master_Read_FSM_Reset: coverpoint $root.top.master.state iff (!(bfm.areset_n)) {   // Coverpoint for Master Read FSM
+		Master_Read_FSM_Reset: coverpoint $root.top.master0.state iff (!(bfm.areset_n)) {   // Coverpoint for Master Read FSM
 			bins mr_reset1 = (RADDR => IDLE);
 			bins mr_reset2 = (RDATA => IDLE);
 			illegal_bins mr_illegal1 = (IDLE => RADDR);
@@ -221,7 +221,7 @@ class axi_lite_coverage;
 			illegal_bins mr_illegal7 = (IDLE => RDATA);
 		}
 	
-		Master_Write_FSM_Reset: coverpoint $root.top.master.state iff (!(bfm.areset_n)) {    // Coverpoint for Master Write FSM
+		Master_Write_FSM_Reset: coverpoint $root.top.master0.state iff (!(bfm.areset_n)) {    // Coverpoint for Master Write FSM
 			bins mw_reset1 = (WADDR => IDLE);
 			bins mw_reset2 = (WDATA => IDLE);
 			bins mw_reset3 = (WRESP => IDLE);
@@ -236,7 +236,7 @@ class axi_lite_coverage;
 			illegal_bins mw_illegal9 = (WADDR => WRESP);
 		}
 	
-		Slave_Read_FSM_Reset: coverpoint $root.top.slave.state iff (!(bfm.areset_n)) {    // Coverpoint for Slave Read FSM
+		Slave_Read_FSM_Reset: coverpoint $root.top.slave0.state iff (!(bfm.areset_n)) {    // Coverpoint for Slave Read FSM
 			bins sr_reset1 = (RADDR => IDLE);
 			bins sr_reset2 = (RDATA => IDLE);
 			illegal_bins sr_illegal1 = (IDLE => RADDR);
@@ -245,7 +245,7 @@ class axi_lite_coverage;
 			illegal_bins sr_illegal7 = (IDLE => RDATA);
 		}
 	
-		Slave_Write_FSM_Reset: coverpoint $root.top.slave.state iff (!(bfm.areset_n)) {     // Coverpoint for Slave Write FSM
+		Slave_Write_FSM_Reset: coverpoint $root.top.slave0.state iff (!(bfm.areset_n)) {     // Coverpoint for Slave Write FSM
 			bins sw_reset1 = (WADDR => IDLE);
 			bins sw_reset2 = (WDATA => IDLE);
 			bins sw_reset3 = (WRESP => IDLE);
