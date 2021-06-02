@@ -15,14 +15,14 @@ class testFactory;
                                             int numTransactions);
 
         fully_random_test fully_random_test_h;
-		deterministic_test deterministic_test_h;
+		deterministic_tests deterministic_test_h;
 
         case (testType)
             "full_random" 		: begin
 									fully_random_test_h = new(mb_generator2driver, debugMode, numTransactions);
 									return fully_random_test_h;
 								  end
-			"deterministic_test": 	begin
+			"deterministic": 	begin
 									deterministic_test_h = new(mb_generator2driver, debugMode, numTransactions);
 									return deterministic_test_h;
 								  end
