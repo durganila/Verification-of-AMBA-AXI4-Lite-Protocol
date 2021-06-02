@@ -15,7 +15,7 @@ module top();
   logic  areset_n;                        // var for reset
 
   // TODO: Get from plusargs
-  string test_type       = "full_random";      // var for test type
+  string test_type = "deterministic";      // var for test type
   logic  debugMode       = 1'b1;               // var for debug mode
   int    numTransactions = 10;                 // var for number of transactions
 
@@ -32,6 +32,11 @@ module top();
 		.s_axi_lite(bfm0.slave)
 	);
 
+/* //get test type
+	initial begin
+	if((!$value$plusargs("test_type=%s","deterministic")) || (!$value$plusargs("test_type=%s","full_random")))
+		$display("test type can be either 'deterministic' or 'full_random'");
+	end */
 
   //Object handles:
   environment env_h;
