@@ -13,7 +13,7 @@ package axi_lite_pkg;
 	localparam addr0 = 32'h4;
 	localparam addr1 = 32'h14;
 	
-	localparam ADDR_WIDTH = 12;
+	localparam ADDR_WIDTH = 32;
 	localparam DATA_WIDTH = 8;
 	localparam STRB_WIDTH = DATA_WIDTH / 8;
 

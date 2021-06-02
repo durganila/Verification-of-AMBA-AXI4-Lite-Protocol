@@ -22,6 +22,7 @@ class transaction;
 	                  start_read_0 != start_write_0;
 	                  start_read_1 != start_write_1;
 				           } */
+
 	
   constraint addr_range {
                         addr inside{[0 : 2048]};
