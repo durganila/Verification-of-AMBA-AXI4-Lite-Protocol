@@ -86,7 +86,5 @@ package axi_lite_pkg;
 `include "testfactory.sv"
 `include "monitor.sv"
 `include "scoreboard.sv"
-//`include "axi_lite_coverage.sv"
-`include "axi_env.sv"
 
 endpackage
