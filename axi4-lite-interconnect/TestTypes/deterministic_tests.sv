@@ -1,6 +1,6 @@
 import axi_lite_pkg::*;
 
-class deterministic_test extends generator;
+class deterministic_tests extends generator;
 
     transaction txn;
 
@@ -10,39 +10,39 @@ class deterministic_test extends generator;
 
     task execute();
 		int i,j;
-        //simple write and read txns to existing slave address
-		driver_send(1'b1, 32'h4, 8'b10101010, '0, '1);
+        /* //simple write and read txns to existing slave address
+		driver_send(1'b1, 12'h4, 32'hDEADBEEF, '0, '1);
         #10;
-        driver_send(1'b1, 32'h4, '0, '1, '0);
+        driver_send(1'b1, 12'h4, '0, '1, '0);
+        #10; 
+		 */
+		/* //simple write and read txns to non-existing slave address
+		driver_send(1'b1, 16'h1003, 32'hFEEDBEEF, '0, '1);
         #10;
+        driver_send(1'b1, 16'h1003, '0, '1, '0);
+        #10; */
 		
-		//simple write and read txns to non-existing slave address
-		driver_send(1'b1, 32'h1003, 8'b00001010, '0, '1);
+		/* //write  and read address -'0 and 4095
+		driver_send(1'b1, 12'h0, 32'h0FEDBEEF, '0, '1);
         #10;
-        driver_send(1'b1, 32'h1003, '0, '1, '0);
+        driver_send(1'b1, 12'h0, '0, '1, '0);
         #10;
+        driver_send(1'b1, 12'hFFF, '0, '0, '1);
+        #10;
+        driver_send(1'b1, 32'hFFF, '0, '1, '0);
+        #10;  */ 
 		
-		//write  and read address -'0 and 4098
-		driver_send(1'b1, 32'h0, '0, '0, '1);
-        #10;
-        driver_send(1'b1, 32'h0, '0, '1, '0);
-        #10;
-        driver_send(1'b1, 32'h1001, 8'hFF, '0, '1);
-        #10;
-        driver_send(1'b1, 32'h1001, '0, '1, '0);
-        #10;  
-		
-		//write to locations from 0 to 4098 and read in reverse order
-		for(i = 0; i < 4098; i=i+1) begin 
+		/* //write to locations from 0 to 2048 and read in reverse order
+		for(i = 0; i < 200; i=i+1) begin 
 			driver_send(1'b1, i, i+10, '0, '1);
 			#10;
 		end
-		for(i = 4097; i >0; i=i-1) begin 
+		for(i = 200; i >0; i=i-1) begin 
 			driver_send(1'b1, i, '0, '1, '0);
 			#10;
-		end
+		end */
 
-		//write  and read data - all zeros & all ones
+		/* //write  and read data - all zeros & all ones
 		driver_send(1'b1, 32'h4, '0, '0, '1);
         #10;
         driver_send(1'b1, 12'h4, '0, '1, '0);
@@ -50,27 +50,27 @@ class deterministic_test extends generator;
         driver_send(1'b1, 32'h4, 8'hFF, '0, '1);
         #10;
         driver_send(1'b1, 32'h4, '0, '1, '0);
-        #10;  
+        #10; */  
 		
-		// consecutive writes (overwriting)  to same location followed by a read
+		/* // consecutive writes (overwriting)  to same location followed by a read
 		driver_send(1'b1, 32'h4, 8'hBE, '0, '1);
         #10;
 		 driver_send(1'b1, 32'h4, 8'b10101110, '0, '1);
         #10;
         driver_send(1'b1, 12'h4, '0, '1, '0);
-        #10;
+        #10; */
 		
-		//read and write to same location at same time
+		/* //read and write to same location at same time
 		driver_send(1'b1, 32'h4, 8'h0F, '0, '1);
         driver_send(1'b1, 32'h4, '0, '1, '0);
-        #10;
+        #10; */
 		
-		//write to different locations at same time
+		/* //write to different locations at same time
 		driver_send(1'b1, 32'h4, 8'hBF, '0, '1);
         driver_send(1'b1, 32'h14, 8'hAA, '0, '1);
         #10;
-		
-		//Modifying alternate locations and reading all the locations
+		 */
+		/* //Modifying alternate locations and reading all the locations
 		for(j = 0; j < 4096; j=j+1) begin 
 			driver_send(1'b1, j, j+10, '0, '1);
 			#10;
@@ -87,7 +87,7 @@ class deterministic_test extends generator;
 			driver_send(1'b1, j, '0, '1, '0);
 			#10;
 		end 
-		
+		 */
 		
     endtask
 
