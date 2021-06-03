@@ -37,7 +37,7 @@ class deterministic_test extends generator;
 			driver_send(1'b1, i, i+10, '0, '1);
 			#10;
 		end
-		for(i = 4097; i >0; i=i+1) begin 
+		for(i = 4097; i >0; i=i-1) begin 
 			driver_send(1'b1, i, '0, '1, '0);
 			#10;
 		end
