@@ -1,0 +1,30 @@
+all: clean lib compile run cover_report
+
+help:
+	@echo -e "\nMakeInfo: This is a MakeFile running\nMakeInfo: Following commands present--\n"   
+	@echo -e "	--	all		 -> Simulates design and runs all related commands\n"
+	@echo -e "	--	clean	 -> Cleans all simulation related files\n"
+	@echo -e "	--	lib		 -> Forms work directory\n"
+	@echo -e "	--	compile	 -> Compiles testbench and DUT files\n"
+	@echo -e "	--	run		 -> Runs simulation\n"
+
+clean:
+	rm -rf transcript vsim.wlf modelsim.ini func_cover_report.txt work
+	@echo -e "\nMakeInfo: All simulation related files cleared\n"
+
+lib: 
+	vlib work
+	vmap work work 
+	@echo -e "\nMakeInfo: Work directory created!\n"
+	
+compile:
+	vlog -cover bst design.sv testbench.sv
+	@echo -e "\nMakeInfo: Compilation successful!\n"
+	
+run:
+	@echo -e "\nMakeInfo: Running Simulation with Coverage......!\n"
+	vsim -voptargs="+acc" +IS_DEBUG_MODE=0 +TEST_TYPE=full_random +NUM_TRANSACTIONS=1000 top -do "add wave -r sim:/top/*; run -all; coverage report -output report.txt -srcfile=* -detail -annotate -directive -cvg -codeAll; quit"
+	
+	
+
+
