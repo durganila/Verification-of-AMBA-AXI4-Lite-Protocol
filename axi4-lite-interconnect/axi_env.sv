@@ -21,7 +21,7 @@ class environment;
 	driver 				driver_h;				// driver handler	
 	monitor 			monitor_h;				// monitor handler
 	scoreboard 			scoreboard_h;			// scoreboard handler
-	axi_lite_coverage 	coverage_h;			// coverage handler
+	axi_lite_coverage 	coverage_h;				// coverage handler
 	testFactory			testFactory_h;			// test factory handler
 	
 	// mailbox for connection between generator and driver

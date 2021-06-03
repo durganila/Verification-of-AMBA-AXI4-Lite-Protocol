@@ -20,10 +20,12 @@ class testFactory;
         case (testType)
             "full_random" 		: begin
 									fully_random_test_h = new(mb_generator2driver, debugMode, numTransactions);
+									if(debugMode) $display("Running Full Random Test");
 									return fully_random_test_h;
 								  end
-			"deterministic": 	begin
+			"deterministic"		: begin
 									deterministic_test_h = new(mb_generator2driver, debugMode, numTransactions);
+									if(debugMode) $display("Running Deterministic Test");
 									return deterministic_test_h;
 								  end
             default				: begin

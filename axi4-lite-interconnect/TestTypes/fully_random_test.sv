@@ -18,17 +18,16 @@ class fully_random_test extends generator;
     endfunction 
 
     task execute();
-            repeat(numTransactions) begin
-                // randomize transactions
-                generate_pkt = new();
-                assert (generate_pkt.randomize())
-                    else $error($time, "fully_random_test: Assertion RandomizeTransactions failed!");
-                
-                driver_send(1'b1, generate_pkt.addr, generate_pkt.data, '0, '1);
-                #10;
-                driver_send(1'b1, generate_pkt.addr, '0, '1, '0);
-                #10;
-            end
+        // fully random transactions
+        repeat(numTransactions) begin
+            // randomize transactions
+            generate_pkt = new();
+            assert (generate_pkt.randomize())
+                else $error($time, "fully_random_test: Assertion RandomizeTransactions failed!");
+            
+            driver_send(1'b1, generate_pkt.addr, generate_pkt.data, generate_pkt.start_read, generate_pkt.start_write);
+            #10;
+        end
     endtask
 
     task driver_send(
