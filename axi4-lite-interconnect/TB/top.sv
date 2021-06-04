@@ -8,7 +8,7 @@
 
 //Packages and includes:
 import axi_lite_pkg::*;
-`include "axi_env.sv"
+`include "TB/axi_env.sv"
 
 
 module top();

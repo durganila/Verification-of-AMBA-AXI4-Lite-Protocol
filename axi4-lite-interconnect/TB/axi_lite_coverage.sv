@@ -25,8 +25,8 @@ class axi_lite_coverage;
 	
 	Read_Address: coverpoint bfm.araddr {                          	// Coverpoint for Read Address
 		bins araddr_First_Location = {0};
-		bins araddr_Last_Location = {4096};
-		bins araddr_range[] = {[1:4095]};
+		bins araddr_Last_Location = {4095};
+		bins araddr_range = {[1:4094]};
 		}
 	endgroup : cg_Read_Address
 	
@@ -45,8 +45,8 @@ class axi_lite_coverage;
 	
 	Read_Data: coverpoint bfm.rdata {                                 // Coverpoint for Read Data
 		bins rdata_All_Zeros = {0};
-		bins rdata_All_Ones = {4096};
-		bins rdata_range[] = {[1:4095]};
+		bins rdata_All_Ones = {4095};
+		bins rdata_range = {[1:4094]};
 		}
 	endgroup : cg_Read_Data
 	
@@ -65,8 +65,8 @@ class axi_lite_coverage;
 	
 	Write_Address: coverpoint bfm.awaddr {                               // Coverpoint for Write Address signal
 		bins awaddr_First_Location = {0};
-		bins awaddr_Last_Location = {4096};
-		bins awaddr_range[] = {[1:4095]};
+		bins awaddr_Last_Location = {4095};
+		bins awaddr_range = {[1:4094]};
 		}
 	endgroup : cg_Write_Address
 	
@@ -85,8 +85,8 @@ class axi_lite_coverage;
 	
 	Write_Data: coverpoint bfm.wdata {                               // Coverpoint for Write Data signal
 		bins wdata_All_Zeros = {0};
-		bins wdata_All_Ones = {4096};
-		bins wdata_range[] = {[1:4095]};
+		bins wdata_All_Ones = {4095};
+		bins wdata_range = {[1:4094]};
 		}
 	endgroup : cg_Write_Data
 	
