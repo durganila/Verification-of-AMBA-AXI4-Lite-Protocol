@@ -51,7 +51,7 @@ class deterministic_tests extends generator;
         driver_send(1'b1, 32'h7FF, '0, '1, '0);
         #10;  
 		
-		//write to locations from 0 to 2048 and read in reverse order
+		/* //write to locations from 0 to 2048 and read in reverse order
 		for(i = 0; i < 7FF; i=i+1) begin 
 			driver_send(1'b1, i, i+10, '0, '1);
 			#10;
@@ -59,7 +59,7 @@ class deterministic_tests extends generator;
 		for(i = 7FF; i >=0; i=i-1) begin 
 			driver_send(1'b1, i, '0, '1, '0);
 			#10;
-		end
+		end */
 
 		//write  and read data - all zeros & all ones
 		driver_send(1'b1, 32'h4, '0, '0, '1);
@@ -112,13 +112,13 @@ class deterministic_tests extends generator;
 			#10;
 		end 
 		
-		/* //reset after write
+		//reset after write
 		driver_send(1'b1, 12'h4, 8'hEF, '0, '1);
         #10;
         driver_send(1'b0, '0, '0, '1, '0);
         #10; 
 		 driver_send(1'b1, 12'h4, '0, '1, '0);
-        #10;  */
+        #10; 
 		
 		//reset after read
 		driver_send(1'b1, 12'h4, 8'hEF, '0, '1);
@@ -142,7 +142,7 @@ class deterministic_tests extends generator;
         driver_send(1'b0, 12'h4, '0, '1, '0);
         #10; 
 		
-		//read when reset asserted
+		//write when reset asserted
 		driver_send(1'b0, 12'h4, 8'hEF, '0, '1);
         #10;
 		 driver_send(1'b1, 12'h4, '0, '1, '0);

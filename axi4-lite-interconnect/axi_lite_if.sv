@@ -10,9 +10,10 @@
 import axi_lite_pkg::*;
 
 interface axi_lite_if (
-			input logic aclk,
-			input logic areset_n);
+			input logic aclk
+			);
 
+	logic areset_n;
 	logic start_write;
 	logic start_read;
 	addr_t addr;
@@ -80,4 +81,10 @@ interface axi_lite_if (
 		output bresp, bvalid      //output dump_ack, output slave_buff_addr, output slave_buff_data, input start_dump
 	);
 
+	task InitialReset();
+    areset_n = 0;
+    repeat(2) @(posedge aclk);
+    areset_n = 1;
+  endtask 
+  
 endinterface

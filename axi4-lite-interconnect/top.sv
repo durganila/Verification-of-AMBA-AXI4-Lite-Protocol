@@ -14,14 +14,14 @@ import axi_lite_pkg::*;
 module top();
 
   logic  aclk;                                  // var for clock
-  logic  areset_n;                              // var for reset
+ // logic  areset_n;                              // var for reset
 
   string test_type       = "deterministic";     // var for test type
   logic  debugMode       = 1'b1;                // var for debug mode
   int    numTransactions = 10;                  // var for number of transactions
 
   //Instantiate the virtual interface:
-  axi_lite_if bfm0(.aclk(aclk), .areset_n(areset_n));
+  axi_lite_if bfm0(.aclk(aclk));
 
   //Instantiate the DUT master and slave:
 	axi_lite_master #(addr0) master0 (
@@ -54,7 +54,7 @@ module top();
     if($value$plusargs("NUM_TRANSACTIONS=%d", numTransactions))
       $display("NUM_TRANSACTIONS is %d", numTransactions);
 
-    InitialReset();
+   bfm0.InitialReset();
     env_h = new(bfm0, test_type, debugMode, numTransactions);
     env_h.execute();
   end
@@ -64,10 +64,5 @@ module top();
     $finish();
   end
 
-  task InitialReset();
-    areset_n = 0;
-    repeat(2) @(posedge aclk);
-    areset_n = 1;
-  endtask
 
 endmodule

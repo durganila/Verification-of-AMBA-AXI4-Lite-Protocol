@@ -33,6 +33,7 @@ class driver;
 
     task drive_master(transaction txn);    
         // set writes
+		bfm0.areset_n		= txn.reset_n;
         bfm0.addr           = txn.addr;
         bfm0.data           = txn.data;
         bfm0.start_write    = txn.start_write;
