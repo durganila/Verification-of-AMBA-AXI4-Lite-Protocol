@@ -1,4 +1,4 @@
-all: clean lib compile run cover_report
+all: clean lib compile opt run
 
 help:
 	@echo -e "\nMakeInfo: This is a MakeFile running\nMakeInfo: Following commands present--\n"   
@@ -18,12 +18,29 @@ lib:
 	@echo -e "\nMakeInfo: Work directory created!\n"
 	
 compile:
-	vlog -cover bst design.sv testbench.sv
+	vlog axi_lite_pkg.sv
+	vlog axi_lite_master.sv
+	vlog axi_lite_slave.sv
+	vlog axi_lite_if.sv
+	vlog axi_env.sv
+	vlog driver.sv
+	vlog generator.sv
+	vlog monitor.sv
+	vlog scoreboard.sv
+	vlog testFactory.sv
+	vlog transaction.sv
+	vlog axi_lite_coverage.sv
+	vlog top.sv
+	vlog ../TestTypes/deterministic_tests.sv
+	vlog ../TestTypes/fully_random_test.sv
 	@echo -e "\nMakeInfo: Compilation successful!\n"
+	
+opt:
+	vopt +acc +cover=bcesxf top -o top_optimized 
 	
 run:
 	@echo -e "\nMakeInfo: Running Simulation with Coverage......!\n"
-	vsim -voptargs="+acc" +IS_DEBUG_MODE=0 +TEST_TYPE=full_random +NUM_TRANSACTIONS=1000 top -do "add wave -r sim:/top/*; run -all; coverage report -output report.txt -srcfile=* -detail -annotate -directive -cvg -codeAll; quit"
+	vsim -voptargs="+acc" +IS_DEBUG_MODE=0 +TEST_TYPE=full_random +NUM_TRANSACTIONS=1000 top_optimized -do "add wave -r sim:/top/*; run -all; coverage report -output func_cover_report.txt -srcfile=* -detail -annotate -directive -cvg -codeAll; quit"
 	
 	
 
