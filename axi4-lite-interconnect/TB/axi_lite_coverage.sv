@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
-// Name         : coverage.sv 
-// Description  :                                                               
+// Name         : axi_lite_coverage.sv 
+// Description  : Functional coverage groups and bins.                                                             
 // Authors      : Amrutha | Durganila | Manjari  				                                 
 // Date         : 05/18/2021                                                                  
 // Version      : 1                                                                         

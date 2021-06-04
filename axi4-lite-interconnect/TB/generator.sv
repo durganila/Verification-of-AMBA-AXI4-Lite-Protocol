@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
-// Name         : generator.sv                                                                
+// Name         : generator.sv   
+// Description  : Parent class for test classes.                                                             
 // Authors      : Amrutha | Durganila | Manjari  				                                 
 // Date         : 06/02/2020                                                                  
-// Version      : 1  
-// Modified By  :                                                                         
+// Version      : 1                                                                       
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 import axi_lite_pkg::*;

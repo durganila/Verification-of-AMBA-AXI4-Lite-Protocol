@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
-// Name         : testFactory.sv                                                                
+// Name         : top.sv    
+// Description  : Top module where the DUVs are instantiated                                                           
 // Authors      : Amrutha | Durganila | Manjari  				                                 
 // Date         : 06/02/2020                                                                  
-// Version      : 1  
-// Modified By  :                                                                         
+// Version      : 1                                                                      
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 //Packages and includes:

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Name         : monitor.sv 
-// Description  :                                                               
+// Description  : Monitors the virtual interface and send the data to scoreboards class via mailbox.
 // Authors      : Amrutha | Durganila | Manjari  				                                 
 // Date         : 05/21/2021                                                                  
 // Version      : 1                                                                         

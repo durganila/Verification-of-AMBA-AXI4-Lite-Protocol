@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Name         : driver.sv 
-// Description  :                                                               
+// Description  : The data send by test classes are received by the driver class using mailbox and drives stimulus to DUV via virtual interface.
 // Authors      : Amrutha | Durganila | Manjari  				                                 
 // Date         : 05/20/2021                                                                  
 // Version      : 1                                                                         

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Name         : axi_lite_pkg.sv 
-// Description  :                                                               
-// Authors      :   				                                 
+// Description  : Contains shared parameters, structures and enums used in DUV and testbench
+// Authors      : N/A  				                                 
 // Date         : 05/29/2021                                                                  
 // Version      : 1  
 // Modified	By	: Amrutha | Durganila | Manjari                                                                    
