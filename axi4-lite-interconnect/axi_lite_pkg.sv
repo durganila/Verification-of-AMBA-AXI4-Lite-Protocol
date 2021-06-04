@@ -79,13 +79,13 @@ package axi_lite_pkg;
 	} axi_lite_bus_t;
 
 
-`include "TB/transaction.sv"
-`include "TB/generator.sv"
-`include "TB/driver.sv"
-`include "TB/TestTypes/fully_random_test.sv"
-`include "TB/TestTypes/deterministic_tests.sv"
-`include "TB/testfactory.sv"
-`include "TB/monitor.sv"
-`include "TB/scoreboard.sv"
+`include "./TB/transaction.sv"
+`include "./TB/generator.sv"
+`include "./TB/driver.sv"
+`include "./TB/TestTypes/fully_random_test.sv"
+`include "./TB/TestTypes/deterministic_tests.sv"
+`include "./TB/testFactory.sv"
+`include "./TB/monitor.sv"
+`include "./TB/scoreboard.sv"
 
 endpackage
