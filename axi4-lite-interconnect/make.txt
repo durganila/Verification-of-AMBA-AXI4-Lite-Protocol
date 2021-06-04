@@ -1,0 +1,47 @@
+all: clean lib compile opt run
+
+help:
+	@echo -e "\nMakeInfo: This is a MakeFile running\nMakeInfo: Following commands present--\n"   
+	@echo -e "	--	all		 -> Simulates design and runs all related commands\n"
+	@echo -e "	--	clean	 -> Cleans all simulation related files\n"
+	@echo -e "	--	lib		 -> Forms work directory\n"
+	@echo -e "	--	compile	 -> Compiles testbench and DUT files\n"
+	@echo -e "	--	run		 -> Runs simulation\n"
+
+clean:
+	rm -rf transcript vsim.wlf modelsim.ini func_cover_report.txt work
+	@echo -e "\nMakeInfo: All simulation related files cleared\n"
+
+lib: 
+	vlib work
+	vmap work work 
+	@echo -e "\nMakeInfo: Work directory created!\n"
+	
+compile:
+	vlog axi_lite_pkg.sv
+	vlog axi_lite_master.sv
+	vlog axi_lite_slave.sv
+	vlog axi_lite_if.sv
+	vlog axi_env.sv
+	vlog driver.sv
+	vlog generator.sv
+	vlog monitor.sv
+	vlog scoreboard.sv
+	vlog testFactory.sv
+	vlog transaction.sv
+	vlog axi_lite_coverage.sv
+	vlog top.sv
+	vlog ../TestTypes/deterministic_tests.sv
+	vlog ../TestTypes/fully_random_test.sv
+	@echo -e "\nMakeInfo: Compilation successful!\n"
+	
+opt:
+	vopt +acc +cover=bcesxf top -o top_optimized 
+	
+run:
+	@echo -e "\nMakeInfo: Running Simulation with Coverage......!\n"
+	vsim -voptargs="+acc" +IS_DEBUG_MODE=0 +TEST_TYPE=full_random +NUM_TRANSACTIONS=1000 top_optimized -do "add wave -r sim:/top/*; run -all; coverage report -output func_cover_report.txt -srcfile=* -detail -annotate -directive -cvg -codeAll; quit"
+	
+	
+
+
