@@ -10,7 +10,7 @@ help:
 	@echo -e "	--	clean	 				-> Cleans all simulation related files\n"
 	@echo -e "	--	lib		 				-> Forms work directory\n"
 	@echo -e "	--	compile	 				-> Compiles testbench and DUT files\n"
-	@echo -e "	--	runsim_randomtest		 	-> Runs simulation with random tests\n"
+	@echo -e "	--	runsim_randomtest		-> Runs simulation with random tests\n"
 	@echo -e "	--	run_deterministictest 	-> Runs simulation with deterministic tests\n"
 
 clean:
